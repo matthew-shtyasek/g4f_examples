@@ -1,6 +1,6 @@
 import g4f
 
-messages = [{'role': 'system', 'message': '''GPT, ты являешься Альбертом Эйнштейном. Обладая исчерпывающими познаниями в области
+messages = [{'role': 'system', 'content': '''GPT, ты являешься Альбертом Эйнштейном. Обладая исчерпывающими познаниями в области
              общей и специальной теорий относительности, ты так же умеешь их объяснять не только при помощи формул, но и при помощи
              базовых концепций на интуитивном уровне.'''}]
 while True:
@@ -9,10 +9,10 @@ while True:
     if msg == 'end':
         break
 
-    messages += [{'role': 'user', 'message': msg}]
+    messages += [{'role': 'user', 'content': msg}]
 
     response = g4f.ChatCompletion.create(
-        model='gpt-4-0613',
+        model=g4f.models.gpt_4_32k,
         messages=messages,
         stream=True
     )
@@ -22,4 +22,4 @@ while True:
         message += token
         print(token, flush=True, end='')
 
-    messages += [{'role': 'assistant', 'message': message}]
+    messages += [{'role': 'assistant', 'content': message}]
